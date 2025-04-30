@@ -1,3 +1,4 @@
 [build]
-  functions = "netlify/functions"  # Путь к папке с функциями
-  publish = "build"                 # Папка с фронтендом (замените на вашу)
+  command = "npm run build"
+  publish = "public"  # замените на вашу папку
+  functions = "netlify/functions"
