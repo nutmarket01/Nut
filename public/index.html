@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUTMARKET - Магазин горіхів</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="icon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="icon/favicon.svg" />
+    <link rel="shortcut icon" href="icon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="icon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="NUTMARKET" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="description" content="NUTMARKET - магазин свіжих горіхів, сухофруктів та насіння з доставкою по Україні">
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">NUTMARKET</div>
+                      <!-- Кнопка бургер-меню (появляется только на мобильных) -->
+                       
+        <button class="mobile-menu-toggle" aria-label="Меню">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <nav class="nav">
+            <a href="#" class="nav-link">Головна</a>
+            <a href="#products" class="nav-link">Асортимент</a>
+            <button id="deliveryInfoButton" class="nav-link nav-button">Доставка</button>
+            <button id="contactsButton" class="nav-link nav-button">Контакти</button>
+            <div class="cart-icon-container mobile-only">
+                <div class="cart-icon" id="cartButtonMobile" aria-label="Кошик">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+            </div>
+        
+        
+        <div class="cart-icon-container desktop-only">
+            <div class="cart-icon" id="cartButton" aria-label="Кошик">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">0</span>
+            </div>
+        </div>
+    </div>
+</nav>
+</header>
+
+    <!-- Основной контент -->
+    <main class="main">
+        <section class="hero">
+            <div class="hero-background">
+                <img src="images/hero-bg.jpg" alt="Асортимент горіхів та сухофруктів" class="hero-image" loading="lazy">
+            </div>
+            <div class="hero-content">
+                <h1>СВІЖІ ГОРІХИ ВІД NUTMARKET</h1>
+                <p>Найкращі горіхи з доставкою додому</p>
+                <a href="catalog.pdf" download="Каталог_горіхів_NUTMARKET.pdf" class="btn btn-primary">
+                    Перейти до каталогу
+                </a>
+            </div>
+        </section>
+
+        <section class="products" id="products">
+            <div class="container">
+                <h2>Наші продукти</h2>
+                <div class="product-grid" id="productGrid">
+                    <!-- Товары будут добавлены через JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <section class="order-steps">
+            <div class="container">
+                <h2>Як замовити</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Виберіть товар</h3>
+                        <p>Додайте товар у кошик</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Оформлення</h3>
+                        <p>Заповніть форму замовлення</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Доставка</h3>
+                        <p>Отримайте замовлення</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>NUTMARKET</h3>
+                    <p>Найсвіжіші горіхи та сухофрукти</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Контакти</h3>
+                    <p>+38 (063) 999-99-99</p>
+                    <p>info@nutmarket.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Графік роботи</h3>
+                    <p>Пн-Нд 9:00-20:00</p>
+                </div>
+            </div>
+            <p class="copyright">&copy; 2025 NUTMARKET. Усі права захищені.</p>
+        </div>
+    </footer>
+
+    <!-- Модальные окна -->
+    <div id="cartModal" class="modal" aria-hidden="true">
+        <div class="modal-content">
+            <button class="close" aria-label="Закрити">&times;</button>
+            <h2>Ваше замовлення</h2>
+            <div class="cart-items" id="cartItems">
+                <!-- Товары в корзине -->
+            </div>
+            <div class="cart-total">
+                <p>Всього: <span id="cartTotal">0</span> грн</p>
+                <button id="proceedToCheckout" class="btn btn-primary">Оформити замовлення</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="checkoutModal" class="modal" aria-hidden="true">
+        <div class="modal-content">
+            <button class="close" aria-label="Закрити">&times;</button>
+            <h2>Оформлення замовлення</h2>
+            <form id="orderForm" class="order-form">
+                <h3>Дані для доставки</h3>
+                <input type="text" id="customerName" placeholder="Ім'я*" required aria-required="true">
+                <input type="tel" id="customerPhone" placeholder="Телефон*" required aria-required="true">
+                <input type="email" id="customerEmail" placeholder="Email (необов'язково)">
+                <textarea id="customerAddress" placeholder="Адреса доставки*" required aria-required="true"></textarea>
+                <textarea id="customerComment" placeholder="Коментар до замовлення"></textarea>
+                <button type="submit" id="submitOrder" class="btn btn-primary">Підтвердити замовлення</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="deliveryInfoModal" class="modal" aria-hidden="true">
+        <div class="modal-content">
+            <button class="close" aria-label="Закрити">&times;</button>
+            <h2>Умови доставки</h2>
+            <div class="delivery-info">
+                <p><strong>Доставка здійснюється:</strong> протягом 1-2 днів після оформлення замовлення.</p>
+                <p><strong>Вартість доставки:</strong> 50 грн (безкоштовно при замовленні від 500 грн).</p>
+                <p><strong>Час доставки:</strong> з 10:00 до 20:00.</p>
+                <p><strong>Зони доставки:</strong> Київ та область, інші регіони - за домовленістю.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="contactsModal" class="modal" aria-hidden="true">
+        <div class="modal-content">
+            <button class="close" aria-label="Закрити">&times;</button>
+            <h2>Контакти</h2>
+            <div class="contacts-info">
+                <p><i class="fas fa-map-marker-alt"></i> <strong>Адреса:</strong> вул. Горіхова, 123, Київ</p>
+                <p><i class="fas fa-envelope"></i> <strong>Email:</strong> info@nutmarket.com</p>
+                <p><i class="fas fa-phone"></i> <strong>Телефон:</strong> +38 (063) 999-99-99</p>
+                <p><i class="fas fa-clock"></i> <strong>Графік роботи:</strong> Пн-Нд 9:00-20:00</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js" defer></script>
+    <script>
+        // Управление модальными окнами
+        document.addEventListener('DOMContentLoaded', function() {
+            const modals = {
+                cart: document.getElementById('cartModal'),
+                checkout: document.getElementById('checkoutModal'),
+                delivery: document.getElementById('deliveryInfoModal'),
+                contacts: document.getElementById('contactsModal')
+            };
+
+            // Открытие модальных окон
+            document.getElementById('cartButton').addEventListener('click', () => toggleModal('cart'));
+            document.getElementById('deliveryInfoButton').addEventListener('click', () => toggleModal('delivery'));
+            document.getElementById('contactsButton').addEventListener('click', () => toggleModal('contacts'));
+            document.getElementById('proceedToCheckout').addEventListener('click', () => {
+                toggleModal('cart', false);
+                toggleModal('checkout');
+            });
+
+            // Закрытие модальных окон
+            document.querySelectorAll('.close').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const modal = this.closest('.modal');
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                });
+            });
+
+            // Закрытие при клике вне модального окна
+            window.addEventListener('click', function(event) {
+                if (event.target.classList.contains('modal')) {
+                    event.target.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            function toggleModal(modalName, show = true) {
+                const modal = modals[modalName];
+                if (modal) {
+                    modal.style.display = show ? 'block' : 'none';
+                    document.body.style.overflow = show ? 'hidden' : 'auto';
+                    
+                    if (show && modalName === 'checkout') {
+                        document.getElementById('customerName').focus();
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
