@@ -1,34 +1,47 @@
 const fetch = require('node-fetch');
 
 exports.handler = async (event) => {
-  // Разрешаем только POST-запросы
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method Not Allowed' };
-  }
-
+  // URL вашего Google Apps Script веб-приложения
+  const scriptUrl = 'https://script.google.com/macros/s/AKfycbzINJ_G0mtf-bKnWyeI0o9IyUMhk0ZrmMKZABhVHbvegK-OByVys-Hj1y-peHNdP-TY/exec';
+  
   try {
-    const GAS_URL = 'https://script.google.com/macros/s/AKfycbzhKtTC2HLPH6jtFXkIaY3YAc7sDsFQeQqacJbTjAwMxNeXq5SAuys-H93HswjzTCg0oA/exec'; // Ваш URL Google Apps Script
-    const response = await fetch(GAS_URL, {
+    // Проверяем метод запроса
+    if (event.httpMethod !== 'POST') {
+      return {
+        statusCode: 405,
+        body: JSON.stringify({ error: 'Method Not Allowed' })
+      };
+    }
+    
+    // Парсим данные корзины
+    const cartData = JSON.parse(event.body);
+    
+    // Отправляем данные в Google Apps Script
+    const response = await fetch(scriptUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: event.body
     });
-
-    const data = await response.text();
-
-    return {
-      statusCode: 200,
-      body: data,
-      headers: { 
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type'
-      }
-    };
+    
+    const data = await response.json();
+    
+    if (data.success) {
+      return {
+        statusCode: 200,
+        body: JSON.stringify({ message: 'Order submitted successfully' })
+      };
+    } else {
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: 'Failed to submit order', details: data.error })
+      };
+    }
   } catch (error) {
-    return { 
-      statusCode: 500, 
-      body: JSON.stringify({ error: error.message }),
-      headers: { 'Access-Control-Allow-Origin': '*' }
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: error.message })
     };
   }
 };

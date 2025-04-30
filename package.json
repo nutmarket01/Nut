@@ -1,0 +1,23 @@
+{
+  "name": "site_shop_martemianova",
+  "version": "1.0.0",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nutmarket01/Site_shop_Martemianova.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nutmarket01/Site_shop_Martemianova/issues"
+  },
+  "homepage": "https://github.com/nutmarket01/Site_shop_Martemianova#readme",
+  "description": "",
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  }
+}
