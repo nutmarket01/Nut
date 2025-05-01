@@ -15,7 +15,7 @@ exports.handler = async (event) => {
 
   try {
     // 2. URL вашего Google Apps Script
-    const scriptUrl = 'https://script.google.com/macros/s/AKfycbygQvHLhdgwHaAEGBHAbh6xIeXUTf0BcP2mHDRTv8UjwJh3_JE68wfGMdfR28jgxffTlA/exec';
+    const scriptUrl = 'https://script.google.com/macros/s/AKfycbzJTMBaDnMTExgUCD-bJp86J1riGimyh169pyglCAlX9wDD9K5AX7wORbec0YdJA6yBFA/exec';
 
     // 3. Проверяем наличие тела запроса
     if (!event.body) {
