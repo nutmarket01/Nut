@@ -148,7 +148,7 @@ async function submitOrder() {
   }
 
   try {
-    const response = await fetch('/.netlify/functions/submit-order', {
+    const response = await fetch('/.netlify/functions/send-order', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(order),  // Исправлено orderData на order
