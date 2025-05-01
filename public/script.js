@@ -188,7 +188,13 @@ function calculateTotal() {
 function clearCartAndForm() {
   cart = [];
   localStorage.removeItem('cart');
-  updateCart();
+  renderCart(); // ← Используем существующую функцию
+  
+  document.getElementById('cartModal').style.display = 'none';
+  
+  // Очистка формы
+  ['customerName', 'customerPhone', 'customerEmail', 'customerAddress', 'customerComment']
+    .forEach(id => document.getElementById(id).value = '');
   
   document.getElementById('cartModal').style.display = 'none';
   
