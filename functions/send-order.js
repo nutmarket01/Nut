@@ -1,4 +1,8 @@
-const fetch = require('node-fetch');
+// Используем динамический импорт для ESM-модулей
+let fetch;
+import('node-fetch').then(module => {
+  fetch = module.default;
+}).catch(err => console.error('Ошибка загрузки node-fetch:', err));
 
 exports.handler = async (event) => {
   // 1. Проверяем метод запроса
